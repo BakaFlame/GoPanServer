@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <input type="text" id="username" name="username">
+        <input type="text" id="password" name="password">
+        <button>login</button>
+    </form>
+</body>
+<script>
+//     function setCookie(name,value){  
+
+// var Days = 30;   //cookie 将被保存30天
+
+// var exp  = new Date();  //获得当前时间
+
+// exp.setTime(exp.getTime() + Days*24*60*60*1000);  //换成毫秒
+
+// document.cookie = name + "="+ value + ";expires=" + exp.toGMTString();
+
+// } 
+    $("button").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        $.ajax({
+            type: "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            url: "http://10.24.2.84:23333/api/user/login",
+            dataType: "json",
+            data:{
+                "username":username,
+                "password":password,
+            },
+            success:function (message) {
+                alert("提交成功"+JSON.stringify(message));
+            },
+            error:function (message) {
+                alert("提交失败"+JSON.stringify(message));
+            }
+        });
+    });
+
+    // $("button").click(function(){
+    //     var username = $("#username").val();
+    //     var password = $("#password").val();
+    //     setCookie("username", username);
+    //     setCookie("password", password);
+    //     $.ajax({
+    //         type: "POST",
+    //         xhrFields: {
+    //             withCredentials: true
+    //         },
+    //         crossDomain: true,
+    //         url: "http://10.24.2.84:23333/api/user/login",
+    //         dataType: "json",
+    //         data:{
+    //             "username":username,
+    //             "password":password,
+    //         },
+    //         success:function (message) {
+    //             alert("提交成功"+JSON.stringify(message));
+    //         },
+    //         error:function (message) {
+    //             alert("提交失败"+JSON.stringify(message));
+    //         }
+    //     });
+    // });
+</script>
+</html>

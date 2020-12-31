@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <!-- <input type="text" id="username" name="username">
+        <input type="text" id="password" name="password"> -->
+        <p id="test"></p>
+        <button>login</button>
+    </form>
+</body>
+<script>
+    $("button").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "http://10.24.2.84:23333/api/user/usersendemailcode",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success:function (message) {
+                console.log(JSON.stringify(message));
+                $("#test").html
+            },
+            error:function (message) {
+                console.log(JSON.stringify(message));
+            }
+        });
+    });
+</script>
+</html>
